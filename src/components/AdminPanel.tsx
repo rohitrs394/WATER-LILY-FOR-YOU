@@ -304,7 +304,7 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ state, onUpdateState, on
           </div>
           <div>
             <h1 className="font-serif font-bold text-lg text-[#FFF8F0] flex items-center gap-2">
-              ROYAL SPA TERMINAL <span className="text-[10px] font-sans font-normal px-2 py-0.5 bg-green-500/10 text-green-400 border border-green-500/20 rounded-full">LIVE</span>
+              THE WATER LILY TERMINAL <span className="text-[10px] font-sans font-normal px-2 py-0.5 bg-green-500/10 text-green-400 border border-green-500/20 rounded-full">LIVE</span>
             </h1>
             <p className="text-[10px] text-gray-400 font-mono">Control panel synchronized in real-time</p>
           </div>
@@ -1253,7 +1253,7 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ state, onUpdateState, on
                                 <button
                                   onClick={() => {
                                     // Trigger realistic simulated WhatsApp auto reminder
-                                    const msg = `💆 *ROYAL SPA UPDATE* 💆\n\n` +
+                                    const msg = `💆 *THE WATER LILY UPDATE* 💆\n\n` +
                                       `Hello ${booking.name}, your booking for *${booking.serviceName}* at *${booking.spaLocation}* is now *${booking.status}*!\n\n` +
                                       `📍 Address: ${state.locations.find(l => l.name === booking.spaLocation)?.address || ""}\n\n` +
                                       `We look forward to pampering you! 🤤`;

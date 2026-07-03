@@ -106,7 +106,7 @@ const INITIAL_STATE: AppState = {
   offers: [
     {
       id: "o1",
-      title: "Royal Welcome Special",
+      title: "Water Lily Welcome Special",
       discountDescription: "Flat 20% OFF on all Luxury services. Experience premium rejuvenation.",
       duration: "Expires tonight at 10 PM",
       animationEffect: "gold-glow",
@@ -128,7 +128,7 @@ const INITIAL_STATE: AppState = {
     }
   ],
   content: {
-    heroTitle: "ROYAL INDULGENCE FOR SOUL & SENSES",
+    heroTitle: "WATER LILY INDULGENCE FOR SOUL & SENSES",
     heroSubtitle: "Step into an oasis of pure serenity. Experiencing premium 5-star therapies in DumDum, Kolkata.",
     aboutText: "Welcome to Kolkata's ultimate luxury spa chain. Across our three premium locations in DumDum and Jessore Road, we specialize in high-end massage therapies, restorative facials, and wellness scrubs.",
     galleryImages: [
@@ -141,7 +141,7 @@ const INITIAL_STATE: AppState = {
     faqs: [
       { question: "Do you have certified female therapists?", answer: "Yes, 100% of our therapy staff consists of certified professional female therapists." }
     ],
-    backgroundVideoUrl: "https://player.cloudinary.com/embed/?cloud_name=tbpxcezd&public_id=From_Klickpin.com-_75_Fresh_Instagram_Growth_Tips_for_Everyday-pin-id-1128644356638366738_tajian&autoplay=1&loop=1&muted=1&controls=0",
+    backgroundVideoUrl: "https://res.cloudinary.com/kyyl8tuj/video/upload/v1783079676/From_Klickpin.com-_14_Modern_small_bedroom_decor_ideas_that_make_everyday_moments_look_more_intentional_memorable_and_beautifully_styled_for_anyon_oumhid.mp4",
     sectionVideoUrl: "https://res.cloudinary.com/kyyl8tuj/video/upload/v1783032912/Water_Lilly_Spa_Website_202607030424_adcvqo.mp4"
   },
   apiSettings: {
@@ -366,17 +366,38 @@ export default function App() {
   return (
     <div className="relative min-h-screen text-[#FFF8F0] font-sans selection:bg-[#C9A84C]/30 selection:text-[#FFF8F0] overflow-x-hidden">
       
-      {/* 1. AUTO-LOOP SILENT VIDEO BACKGROUND (Cloudinary Embed) */}
-      <div className="fixed inset-0 w-full h-full -z-30 pointer-events-none overflow-hidden bg-[#041a0f]">
-        <iframe
-          src={state.content.backgroundVideoUrl || "https://player.cloudinary.com/embed/?cloud_name=tbpxcezd&public_id=From_Klickpin.com-_75_Fresh_Instagram_Growth_Tips_for_Everyday-pin-id-1128644356638366738_tajian&autoplay=1&loop=1&muted=1&controls=0"}
-          className="absolute top-1/2 left-1/2 w-[115%] h-[115%] -translate-x-1/2 -translate-y-1/2 object-cover scale-110 pointer-events-none opacity-80"
-          allow="autoplay; encrypted-media; picture-in-picture"
-          title="Ambient Spa Background"
-        />
-        {/* Luxury color tint overlays: clear blend for video detail + high readability gradients */}
-        <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-[#092617]/55 to-black/90 mix-blend-multiply" />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#041a0f]/95 via-transparent to-black/35" />
+      {/* 1. AUTO-LOOP SILENT VIDEO BACKGROUND (Supports direct video and embeds) */}
+      <div className="fixed inset-0 w-full h-full -z-30 pointer-events-none overflow-hidden bg-[#03130a]">
+        {(() => {
+          const url = state.content.backgroundVideoUrl || "https://res.cloudinary.com/kyyl8tuj/video/upload/v1783079676/From_Klickpin.com-_14_Modern_small_bedroom_decor_ideas_that_make_everyday_moments_look_more_intentional_memorable_and_beautifully_styled_for_anyon_oumhid.mp4";
+          const isDirectVideo = url.includes(".mp4") || url.includes("/video/upload");
+          
+          if (isDirectVideo) {
+            return (
+              <video
+                src={url}
+                autoPlay
+                loop
+                muted
+                playsInline
+                className="absolute top-1/2 left-1/2 min-w-full min-h-full w-auto h-auto -translate-x-1/2 -translate-y-1/2 object-cover scale-110 opacity-95 pointer-events-none transition-opacity duration-1000"
+              />
+            );
+          } else {
+            return (
+              <iframe
+                src={url}
+                className="absolute top-1/2 left-1/2 w-[115%] h-[115%] -translate-x-1/2 -translate-y-1/2 object-cover scale-110 pointer-events-none opacity-95 transition-opacity duration-1000"
+                allow="autoplay; encrypted-media; picture-in-picture"
+                title="Ambient Spa Background"
+              />
+            );
+          }
+        })()}
+        {/* Transparent luxury overlays for maximum video clarity and beautiful aesthetic integration */}
+        <div className="absolute inset-0 bg-gradient-to-b from-black/5 via-transparent to-black/40 mix-blend-multiply" />
+        <div className="absolute inset-0 bg-[#041a0f]/5" />
+        <div className="absolute inset-0 bg-black/5" />
       </div>
 
       {/* 2. DYNAMIC GOLDEN SPARKLES ENGINE */}
@@ -385,12 +406,15 @@ export default function App() {
 
 
       {/* 4. PREMIUM NAVIGATION HEADER */}
-      <header className="sticky top-0 z-40 bg-[#061d11]/80 backdrop-blur-md border-b border-[#C9A84C]/25 px-6 py-4 flex items-center justify-between transition-colors">
-        <a href="#" className="flex items-center gap-2">
-          <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-[#D4AF37] to-[#C9A84C] flex items-center justify-center text-[#061d11] font-serif font-bold text-lg shadow-lg">
-            R
+      <header className="sticky top-0 z-40 bg-black/10 backdrop-blur-md border-b border-[#C9A84C]/15 px-6 py-4 flex items-center justify-between transition-colors">
+        <a href="#" className="flex flex-col items-start gap-1">
+          <div className="flex items-center gap-2">
+            <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-[#D4AF37] to-[#C9A84C] flex items-center justify-center text-[#061d11] font-serif font-bold text-lg shadow-lg">
+              W
+            </div>
+            <span className="font-serif font-bold text-base tracking-widest neon-rgb-text">THE WATER LILY</span>
           </div>
-          <span className="font-serif font-bold text-base tracking-widest text-[#FFF8F0]">ROYAL SPA</span>
+          <span className="text-[8px] font-mono tracking-[0.25em] text-[#C9A84C] uppercase ml-10 leading-none">Luxury Spa & Wellness</span>
         </a>
 
         {/* Desktop Links */}
@@ -508,7 +532,7 @@ export default function App() {
 
       {/* ACTIVE OFFERS HORIZONTAL BANNER TICKER */}
       {activeOffer && (
-        <div className="w-full bg-[#061d11] py-3.5 border-y border-[#C9A84C]/25 overflow-hidden relative z-10">
+        <div className="w-full bg-[#061d11]/35 backdrop-blur-md py-3.5 border-y border-[#C9A84C]/25 overflow-hidden relative z-10">
           <div className="flex justify-around items-center gap-8 text-xs font-serif text-center uppercase tracking-wider text-[#C9A84C] px-6">
             <span className="flex items-center gap-2"><Sparkles className="w-4 h-4 text-[#D4AF37] animate-pulse" /> {activeOffer.title}: {activeOffer.discountDescription}</span>
             <span className="hidden md:flex items-center gap-2"><Clock className="w-4 h-4" /> {activeOffer.duration}</span>
@@ -518,7 +542,7 @@ export default function App() {
       )}
 
       {/* 6. SERVICES SECTION (20 Total, Cat Switcher in Premium Transparent Section with Gold Side Glow) */}
-      <div className="w-full bg-[#031109]/75 backdrop-blur-md py-24 px-6 relative z-10 rounded-t-[48px] rounded-b-[48px] border-x-4 border-[#C9A84C]/50 shadow-[0_0_35px_rgba(201,168,76,0.3)]">
+      <div className="w-full bg-[#031109]/20 backdrop-blur-lg py-24 px-6 relative z-10 rounded-t-[48px] rounded-b-[48px] border-x-4 border-[#C9A84C]/50 shadow-[0_0_35px_rgba(201,168,76,0.3)]">
         <section id="services" className="max-w-7xl mx-auto space-y-14">
           <div className="text-center space-y-4">
             <p className="text-[10px] uppercase font-mono tracking-widest text-[#C9A84C] font-bold">Premium Wellness Catalog</p>
@@ -643,8 +667,8 @@ export default function App() {
       )}
 
       {/* FLOATING SPA COMPONENTS ACCENT SECTION */}
-      <section className="bg-gradient-to-b from-transparent via-[#1D1129]/40 to-transparent py-16 px-6">
-        <div className="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 items-center border border-[#C9A84C]/25 rounded-3xl p-8 backdrop-blur-xl bg-[#2D1B3D]/30">
+      <section className="bg-gradient-to-b from-transparent via-[#031109]/30 to-transparent py-16 px-6">
+        <div className="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 items-center border border-[#C9A84C]/25 rounded-3xl p-8 backdrop-blur-xl bg-black/20">
           <div className="grid grid-cols-3 gap-3 h-56 items-center">
             <div className="glass-premium p-4 rounded-2xl flex flex-col items-center justify-center text-center space-y-2 border border-[#C9A84C]/20 gold-glow h-full">
               <span className="text-3xl">🪨</span>
@@ -789,7 +813,7 @@ export default function App() {
                         <Phone className="w-4 h-4" /> Tap to Call 📞
                       </button>
                       <button
-                        onClick={() => window.open(`https://wa.me/${loc.phoneNumbers[0].replace(/[^0-9]/g, "")}?text=${encodeURIComponent("Hello Royal Spa Reception, I would like to enquire about active package reservations.")}`, "_blank")}
+                        onClick={() => window.open(`https://wa.me/${loc.phoneNumbers[0].replace(/[^0-9]/g, "")}?text=${encodeURIComponent("Hello The Water Lily Reception, I would like to enquire about active package reservations.")}`, "_blank")}
                         className="rgb-button py-3 px-4 rounded-xl font-bold text-xs flex items-center justify-center gap-2 cursor-pointer"
                         title="Click to Chat on WhatsApp"
                       >
@@ -1009,8 +1033,8 @@ export default function App() {
       <footer className="bg-black/40 border-t border-white/5 py-12 px-6 text-center text-xs text-gray-400 space-y-6">
         <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-6">
           <div className="flex items-center gap-2">
-            <div className="w-7 h-7 rounded bg-[#C9A84C] text-[#061d11] font-serif font-bold text-sm flex items-center justify-center">R</div>
-            <span className="font-serif font-bold text-[#FFF8F0]">ROYAL SPA CHANCERY</span>
+            <div className="w-7 h-7 rounded bg-[#C9A84C] text-[#061d11] font-serif font-bold text-sm flex items-center justify-center">W</div>
+            <span className="font-serif font-bold text-[#FFF8F0]">THE WATER LILY CHANCERY</span>
           </div>
 
           <div className="flex flex-wrap items-center justify-center gap-6">
@@ -1026,7 +1050,7 @@ export default function App() {
           </div>
         </div>
 
-        <p className="text-[10px] font-mono">© 2026 Royal Spa Group Kolkata. All rights reserved. Managed durably under CJS Container standards.</p>
+        <p className="text-[10px] font-mono">© 2026 The Water Lily Group Kolkata. All rights reserved. Managed durably under CJS Container standards.</p>
       </footer>
 
       {/* 11. MULTILINGUAL AI CONCIERGE BOT PANEL (Sia) */}

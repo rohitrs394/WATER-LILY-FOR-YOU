@@ -127,16 +127,16 @@
 
 /* Premium Official Glassmorphism Panels styled with Royal Forest Green */
 .glass-premium {
-  background: rgba(8, 28, 18, 0.75) !important;
-  backdrop-filter: blur(24px) saturate(140%) !important;
-  -webkit-backdrop-filter: blur(24px) saturate(140%) !important;
+  background: rgba(4, 18, 12, 0.35) !important;
+  backdrop-filter: blur(16px) saturate(140%) !important;
+  -webkit-backdrop-filter: blur(16px) saturate(140%) !important;
   border: 1px solid rgba(201, 168, 76, 0.22) !important;
 }
 
 .glass-premium-dark {
-  background: rgba(5, 18, 12, 0.9) !important;
-  backdrop-filter: blur(28px) saturate(130%) !important;
-  -webkit-backdrop-filter: blur(28px) saturate(130%) !important;
+  background: rgba(3, 11, 7, 0.55) !important;
+  backdrop-filter: blur(20px) saturate(130%) !important;
+  -webkit-backdrop-filter: blur(20px) saturate(130%) !important;
   border: 1px solid rgba(201, 168, 76, 0.28) !important;
 }
 
@@ -199,4 +199,16 @@
 .no-scrollbar {
   -ms-overflow-style: none;  /* IE and Edge */
   scrollbar-width: none;  /* Firefox */
+}
+
+/* Premium Neon RGB Glowing Text */
+.neon-rgb-text {
+  background: linear-gradient(135deg, #FFF8F0 10%, #D4AF37 35%, #10B981 60%, #34D399 75%, #D4AF37 90%, #FFF8F0 100%);
+  background-size: 300% 100%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: rgbShift 5s linear infinite;
+  filter: drop-shadow(0 0 5px rgba(212, 175, 55, 0.7)) drop-shadow(0 0 12px rgba(16, 185, 129, 0.4));
+  font-weight: 800;
+  letter-spacing: 0.15em;
 }
