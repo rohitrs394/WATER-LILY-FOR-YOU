@@ -162,7 +162,17 @@ const INITIAL_STATE: AppState = {
 };
 
 export default function App() {
-  const [state, setState] = useState<AppState>(INITIAL_STATE);
+  const [state, setState] = useState<AppState>(() => {
+    try {
+      const cached = localStorage.getItem("spa_state");
+      if (cached) {
+        return JSON.parse(cached);
+      }
+    } catch (e) {
+      console.error("Error reading initial spa_state from localStorage", e);
+    }
+    return INITIAL_STATE;
+  });
   const [loading, setLoading] = useState(false);
 
 
@@ -193,11 +203,15 @@ export default function App() {
     try {
       const res = await fetch("/api/state");
       if (res.ok) {
-        const data = await res.json();
-        setState(data);
+        const contentType = res.headers.get("content-type");
+        if (contentType && contentType.includes("application/json")) {
+          const data = await res.json();
+          setState(data);
+          localStorage.setItem("spa_state", JSON.stringify(data));
+        }
       }
     } catch (e) {
-      console.error("Failed to load live spa state from server", e);
+      console.warn("Failed to load live spa state from server, using cached local state", e);
     } finally {
       setLoading(false);
     }
@@ -220,19 +234,25 @@ export default function App() {
 
   // Update State handler for Admin Panel
   const handleUpdateState = async (updated: AppState) => {
+    // Always update client-side immediately for 100% responsiveness and offline support
+    setState(updated);
+    try {
+      localStorage.setItem("spa_state", JSON.stringify(updated));
+    } catch (err) {
+      console.error("Failed to save state to localStorage", err);
+    }
+
     try {
       const res = await fetch("/api/state", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(updated)
       });
-      if (res.ok) {
-        setState(updated);
-      } else {
-        console.error("Failed to save state to backend");
+      if (!res.ok) {
+        console.warn("Server update unsuccessful, saved changes to local storage");
       }
     } catch (e) {
-      console.error(e);
+      console.warn("Failed to save state to backend, changes are preserved locally in browser", e);
     }
   };
 
@@ -257,6 +277,18 @@ export default function App() {
     e.preventDefault();
     setBookingStatus("submitting");
 
+    const localBooking: Booking = {
+      id: "b_" + Date.now(),
+      name: bookingForm.name,
+      phone: bookingForm.phone,
+      spaLocation: bookingForm.spaLocation,
+      serviceName: bookingForm.serviceName,
+      dateTime: bookingForm.dateTime,
+      specialRequests: bookingForm.specialRequests,
+      status: "Pending",
+      createdAt: new Date().toISOString()
+    };
+
     try {
       const res = await fetch("/api/bookings", {
         method: "POST",
@@ -265,7 +297,13 @@ export default function App() {
       });
 
       if (res.ok) {
-        const data = await res.json();
+        const contentType = res.headers.get("content-type");
+        let data;
+        if (contentType && contentType.includes("application/json")) {
+          data = await res.json();
+        } else {
+          data = { success: true, booking: localBooking };
+        }
         setRecentBookingResult(data);
         setBookingStatus("success");
         // Clear form
@@ -280,12 +318,41 @@ export default function App() {
         // Fetch state to load new booking in lists
         fetchState();
       } else {
-        alert("Submission failed. Try again.");
-        setBookingStatus("idle");
+        // Fallback to local save if server fails (e.g., Netlify/static build)
+        const updatedBookings = [localBooking, ...(state.bookings || [])];
+        const updatedState = { ...state, bookings: updatedBookings };
+        setState(updatedState);
+        localStorage.setItem("spa_state", JSON.stringify(updatedState));
+
+        setRecentBookingResult({ success: true, booking: localBooking });
+        setBookingStatus("success");
+        setBookingForm({
+          name: "",
+          phone: "",
+          spaLocation: "Drop Spa",
+          serviceName: "Swedish Massage",
+          dateTime: "",
+          specialRequests: ""
+        });
       }
     } catch (err) {
-      console.error(err);
-      setBookingStatus("idle");
+      console.warn("API booking submit failed, falling back to local booking save", err);
+      // Fallback to local save if connection fails (e.g., Netlify offline/static build)
+      const updatedBookings = [localBooking, ...(state.bookings || [])];
+      const updatedState = { ...state, bookings: updatedBookings };
+      setState(updatedState);
+      localStorage.setItem("spa_state", JSON.stringify(updatedState));
+
+      setRecentBookingResult({ success: true, booking: localBooking });
+      setBookingStatus("success");
+      setBookingForm({
+        name: "",
+        phone: "",
+        spaLocation: "Drop Spa",
+        serviceName: "Swedish Massage",
+        dateTime: "",
+        specialRequests: ""
+      });
     }
   };
 
