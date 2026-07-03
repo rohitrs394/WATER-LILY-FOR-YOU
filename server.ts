@@ -402,25 +402,37 @@ function saveDb(state: AppState) {
   }
 }
 
-// OpenAI-compatible validation helper
+// OpenAI-compatible validation helper with robust 10-second timeout
 async function testOpenAICompatible(url: string, key: string, model: string): Promise<boolean> {
-  const response = await fetch(url, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      "Authorization": `Bearer ${key}`
-    },
-    body: JSON.stringify({
-      model: model,
-      messages: [{ role: "user", content: "hi" }],
-      max_tokens: 5
-    })
-  });
-  if (!response.ok) {
-    const errText = await response.text().catch(() => "");
-    throw new Error(`API returned HTTP ${response.status}: ${errText || "No response body"}`);
+  const controller = new AbortController();
+  const timeoutId = setTimeout(() => controller.abort(), 10000);
+  try {
+    const response = await fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${key}`
+      },
+      body: JSON.stringify({
+        model: model,
+        messages: [{ role: "user", content: "hi" }],
+        max_tokens: 5
+      }),
+      signal: controller.signal
+    });
+    clearTimeout(timeoutId);
+    if (!response.ok) {
+      const errText = await response.text().catch(() => "");
+      throw new Error(`API returned HTTP ${response.status}: ${errText || "No response body"}`);
+    }
+    return true;
+  } catch (err: any) {
+    clearTimeout(timeoutId);
+    if (err.name === "AbortError" || err.name === "Aborted") {
+      throw new Error("Connection to API timed out (10s)");
+    }
+    throw err;
   }
-  return true;
 }
 
 // OpenAI-compatible chat completion helper
@@ -542,12 +554,12 @@ async function startServer() {
 
   // Verify API endpoint (supports deepseek, openai, grok, kimi, gemini)
   app.post("/api/verify-api", async (req, res) => {
-    const { provider, key, model } = req.body;
-    if (!provider || !key) {
-      return res.status(400).json({ valid: false, error: "Provider and key are required" });
-    }
-
     try {
+      const { provider, key, model } = req.body || {};
+      if (!provider || !key) {
+        return res.status(400).json({ valid: false, error: "Provider and key are required" });
+      }
+
       if (provider === "openai") {
         await testOpenAICompatible("https://api.openai.com/v1/chat/completions", key, model || "gpt-4o-mini");
       } else if (provider === "deepseek") {
@@ -561,11 +573,15 @@ async function startServer() {
           apiKey: key,
           httpOptions: { headers: { 'User-Agent': 'aistudio-build' } }
         });
-        const result = await ai.models.generateContent({
+        const geminiPromise = ai.models.generateContent({
           model: model || "gemini-1.5-flash",
           contents: "hi",
           config: { maxOutputTokens: 5 }
         });
+        const timeoutPromise = new Promise<never>((_, reject) =>
+          setTimeout(() => reject(new Error("Gemini API connection timed out (10s)")), 10000)
+        );
+        const result = await Promise.race([geminiPromise, timeoutPromise]);
         if (!result.text) {
           throw new Error("No response text returned from Gemini");
         }
@@ -585,7 +601,7 @@ async function startServer() {
 
       res.json({ valid: true });
     } catch (e: any) {
-      console.error(`Verification failed for provider ${provider}:`, e);
+      console.error(`Verification failed:`, e);
       res.status(400).json({ valid: false, error: e.message || "Failed to connect or authorize API Key" });
     }
   });

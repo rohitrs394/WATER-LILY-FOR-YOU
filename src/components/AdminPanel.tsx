@@ -184,7 +184,15 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ state, onUpdateState, on
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ provider, key, model })
       });
-      const data = await res.json();
+      
+      const text = await res.text();
+      let data: any = {};
+      try {
+        data = JSON.parse(text);
+      } catch (err) {
+        throw new Error(`Server returned a non-JSON response (HTTP ${res.status}): ${text.substring(0, 100) || "No content"}`);
+      }
+
       if (res.ok && data.valid) {
         setVerifyStatus("success");
         // Retrieve fresh database state after successful verification
