@@ -141,7 +141,7 @@ const INITIAL_STATE: AppState = {
     faqs: [
       { question: "Do you have certified female therapists?", answer: "Yes, 100% of our therapy staff consists of certified professional female therapists." }
     ],
-    backgroundVideoUrl: "https://res.cloudinary.com/kyyl8tuj/video/upload/v1783079676/From_Klickpin.com-_14_Modern_small_bedroom_decor_ideas_that_make_everyday_moments_look_more_intentional_memorable_and_beautifully_styled_for_anyon_oumhid.mp4",
+    backgroundVideoUrl: "https://player.cloudinary.com/embed/?cloud_name=tbpxcezd&public_id=From_Klickpin.com-_75_Fresh_Instagram_Growth_Tips_for_Everyday-pin-id-1128644356638366738_tajian&autoplay=true&loop=true&muted=true&controls=false",
     sectionVideoUrl: "https://res.cloudinary.com/kyyl8tuj/video/upload/v1783032912/Water_Lilly_Spa_Website_202607030424_adcvqo.mp4"
   },
   apiSettings: {
