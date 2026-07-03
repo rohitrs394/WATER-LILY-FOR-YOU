@@ -1,0 +1,202 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=JetBrains+Mono:wght@400;500&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-serif: "Playfair Display", ui-serif, Georgia, serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+}
+
+/* Custom premium organic and gold highlights */
+.gold-glow {
+  box-shadow: 0 0 25px rgba(201, 168, 76, 0.35);
+  border-color: rgba(201, 168, 76, 0.5) !important;
+}
+
+/* Classy organic neon/glow effect for luxury apothecary look */
+.neon-glow-gold {
+  box-shadow: 0 0 25px rgba(201, 168, 76, 0.45), inset 0 0 15px rgba(201, 168, 76, 0.2);
+  border-color: rgba(201, 168, 76, 0.65) !important;
+}
+
+.neon-glow-emerald {
+  box-shadow: 0 0 25px rgba(16, 185, 129, 0.25), inset 0 0 15px rgba(16, 185, 129, 0.1);
+  border-color: rgba(16, 185, 129, 0.4) !important;
+}
+
+.neon-glow-cyan {
+  box-shadow: 0 0 25px rgba(52, 211, 153, 0.25), inset 0 0 15px rgba(52, 211, 153, 0.1);
+  border-color: rgba(52, 211, 153, 0.4) !important;
+}
+
+/* Subtle elegant neon text glow */
+.neon-text-gold {
+  color: #fffaf0;
+  text-shadow: 0 0 8px rgba(201, 168, 76, 0.7), 0 0 20px rgba(201, 168, 76, 0.35);
+}
+
+.neon-text-emerald {
+  color: #f0fdf4;
+  text-shadow: 0 0 8px rgba(16, 185, 129, 0.6), 0 0 20px rgba(16, 185, 129, 0.3);
+}
+
+/* Organic breathing gold-emerald border shift */
+.rgb-neon-border {
+  position: relative;
+}
+.rgb-neon-border::after {
+  content: '';
+  position: absolute;
+  inset: -1.5px;
+  border-radius: inherit;
+  padding: 1.5px;
+  background: linear-gradient(to right, #c9a84c, #10b981, #34d399, #c9a84c);
+  background-size: 300% auto;
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+  animation: rgbShift 8s linear infinite;
+  opacity: 0.85;
+}
+
+/* Premium RGB Neon Animated Glowing Button */
+.rgb-button {
+  position: relative;
+  background: #0A251A !important;
+  color: #FFF8F0 !important;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 0 12px rgba(201, 168, 76, 0.25), 0 0 5px rgba(16, 185, 129, 0.2);
+  z-index: 1;
+  overflow: hidden;
+}
+
+.rgb-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 25px rgba(201, 168, 76, 0.65), 0 0 12px rgba(16, 185, 129, 0.45), 0 0 35px rgba(52, 211, 153, 0.3);
+  text-shadow: 0 0 6px rgba(255, 248, 240, 0.6);
+}
+
+.rgb-button::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 2px;
+  background: linear-gradient(135deg, #c9a84c, #10b981, #34d399, #c9a84c);
+  background-size: 300% 300%;
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+  animation: rgbShift 4s linear infinite;
+  opacity: 0.75;
+  transition: opacity 0.3s ease;
+}
+
+.rgb-button:hover::after {
+  opacity: 1;
+  animation: rgbShift 1.5s linear infinite;
+}
+
+/* Selected active state for RGB tabs/switches */
+.rgb-button-active {
+  position: relative;
+  background: linear-gradient(135deg, #c9a84c, #10b981) !important;
+  color: #05120c !important;
+  box-shadow: 0 0 25px rgba(201, 168, 76, 0.6), 0 0 15px rgba(16, 185, 129, 0.4);
+  font-weight: 800;
+  transition: all 0.3s ease;
+}
+
+.rgb-button-active::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1.5px;
+  background: linear-gradient(135deg, #ffffff, #c9a84c, #ffffff);
+  background-size: 200% auto;
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+  animation: rgbShift 3s linear infinite;
+  opacity: 0.9;
+}
+
+/* Premium Official Glassmorphism Panels styled with Royal Forest Green */
+.glass-premium {
+  background: rgba(8, 28, 18, 0.75) !important;
+  backdrop-filter: blur(24px) saturate(140%) !important;
+  -webkit-backdrop-filter: blur(24px) saturate(140%) !important;
+  border: 1px solid rgba(201, 168, 76, 0.22) !important;
+}
+
+.glass-premium-dark {
+  background: rgba(5, 18, 12, 0.9) !important;
+  backdrop-filter: blur(28px) saturate(130%) !important;
+  -webkit-backdrop-filter: blur(28px) saturate(130%) !important;
+  border: 1px solid rgba(201, 168, 76, 0.28) !important;
+}
+
+/* Micro-lighting glow sweep for cards */
+.card-micro-light {
+  position: relative;
+  overflow: hidden;
+}
+.card-micro-light::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -150%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.12), transparent);
+  transform: skewX(-25deg);
+  pointer-events: none;
+  transition: 0.75s;
+}
+.card-micro-light:hover::before {
+  left: 150%;
+}
+
+@keyframes rgbShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes goldGlow {
+  0%, 100% {
+    box-shadow: 0 0 15px rgba(201, 168, 76, 0.35);
+    border-color: rgba(201, 168, 76, 0.5);
+  }
+  50% {
+    box-shadow: 0 0 32px rgba(201, 168, 76, 0.7);
+    border-color: rgba(201, 168, 76, 0.9);
+  }
+}
+
+.pulse-gold {
+  animation: goldGlow 3s infinite ease-in-out;
+}
+
+/* Premium text readability shadows on video background */
+.text-shadow-premium {
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.95), 0 4px 18px rgba(0, 0, 0, 0.85);
+}
+
+.text-shadow-gold {
+  text-shadow: 0 2px 8px rgba(201, 168, 76, 0.45), 0 1px 3px rgba(0, 0, 0, 0.9);
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+/* Hide scrollbar for IE, Edge and Firefox */
+.no-scrollbar {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}

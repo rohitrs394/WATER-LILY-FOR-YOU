@@ -1,0 +1,6 @@
+{
+  "name": "Luxury Spa Website",
+  "description": "A premium luxury spa website featuring 3D effects, active location maps, interactive booking, therapist profiles, admin control panel, and a multilingual voice helper bot.",
+  "requestFramePermissions": ["microphone"],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
