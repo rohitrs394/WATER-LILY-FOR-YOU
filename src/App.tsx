@@ -54,13 +54,118 @@ const renderMedia = (url: string, className: string, altText: string) => {
   );
 };
 
-export default function App() {
-  const [state, setState] = useState<AppState | null>(null);
-  const [loading, setLoading] = useState(true);
+const INITIAL_STATE: AppState = {
+  services: [
+    {
+      id: "1",
+      name: "Swedish Massage",
+      category: "Normal",
+      price: 999,
+      duration: 60,
+      description: "A classic full-body massage utilizing long, flowing strokes to reduce tension, promote circulation, and ease muscle soreness. Perfect for first-time spa visitors seeking total relaxation.",
+      image: "https://images.unsplash.com/photo-1600334089648-b0d9d3028eb2?auto=format&fit=crop&q=80&w=600",
+      isPrivate: true,
+      available: true
+    },
+    {
+      id: "2",
+      name: "Deep Tissue Massage",
+      category: "Normal",
+      price: 1499,
+      duration: 60,
+      description: "Designed to relieve severe tension in the muscle and connective tissue. Highly recommended for individuals with chronic pain, athletic stiffness, or heavy stress.",
+      image: "https://images.unsplash.com/photo-1544161515-4ab6ce6db874?auto=format&fit=crop&q=80&w=600",
+      isPrivate: true,
+      available: true
+    },
+    {
+      id: "3",
+      name: "Aromatherapy Massage",
+      category: "Normal",
+      price: 1799,
+      duration: 60,
+      description: "Combines the therapeutic power of touch with pure organic essential oils curated to calm your mind, elevate your mood, and heal physical discomfort.",
+      image: "https://images.unsplash.com/photo-1519699047748-de8e457a634e?auto=format&fit=crop&q=80&w=600",
+      isPrivate: true,
+      available: true
+    }
+  ],
+  therapists: [
+    {
+      id: "t1",
+      name: "Maya Sharma",
+      specialization: "Royal Gold & Swedish Massage",
+      experience: "6 Years",
+      rating: 4.9,
+      images: [
+        "https://images.unsplash.com/photo-1594744803329-e58b31de215f?auto=format&fit=crop&q=80&w=300"
+      ],
+      visible: true
+    }
+  ],
+  offers: [
+    {
+      id: "o1",
+      title: "Royal Welcome Special",
+      discountDescription: "Flat 20% OFF on all Luxury services. Experience premium rejuvenation.",
+      duration: "Expires tonight at 10 PM",
+      animationEffect: "gold-glow",
+      active: true,
+      bannerHomepage: true,
+      scheduleFuture: "",
+      autoShowOnLoad: false
+    }
+  ],
+  bookings: [],
+  locations: [
+    {
+      id: "drop",
+      name: "Drop Spa",
+      address: "Drop Spa - Best Massage Parlour in DumDum, 1st Floor, 66/2, Dum Dum Rd, Ward Number 22, Amarpalli, Kolkata, West Bengal 700074",
+      phoneNumbers: ["+91 98307 93242"],
+      mapEmbedUrl: "https://maps.google.com/maps?q=Drop%20Spa%20Dum%20Dum%20Kolkata&t=&z=15&ie=UTF8&iwloc=&output=embed",
+      visible: true
+    }
+  ],
+  content: {
+    heroTitle: "ROYAL INDULGENCE FOR SOUL & SENSES",
+    heroSubtitle: "Step into an oasis of pure serenity. Experiencing premium 5-star therapies in DumDum, Kolkata.",
+    aboutText: "Welcome to Kolkata's ultimate luxury spa chain. Across our three premium locations in DumDum and Jessore Road, we specialize in high-end massage therapies, restorative facials, and wellness scrubs.",
+    galleryImages: [
+      "https://images.unsplash.com/photo-1600334089648-b0d9d3028eb2?auto=format&fit=crop&q=80&w=800",
+      "https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&q=80&w=800"
+    ],
+    testimonials: [
+      { name: "Debashree Sen", comment: "The Royal Gold Massage is an absolute masterpiece.", rating: 5, date: "2026-06-15" }
+    ],
+    faqs: [
+      { question: "Do you have certified female therapists?", answer: "Yes, 100% of our therapy staff consists of certified professional female therapists." }
+    ],
+    backgroundVideoUrl: "https://player.cloudinary.com/embed/?cloud_name=tbpxcezd&public_id=From_Klickpin.com-_75_Fresh_Instagram_Growth_Tips_for_Everyday-pin-id-1128644356638366738_tajian&autoplay=1&loop=1&muted=1&controls=0",
+    sectionVideoUrl: "https://res.cloudinary.com/kyyl8tuj/video/upload/v1783032912/Water_Lilly_Spa_Website_202607030424_adcvqo.mp4"
+  },
+  apiSettings: {
+    provider: "none",
+    deepseekKey: "",
+    openaiKey: "",
+    grokKey: "",
+    kimiKey: "",
+    geminiKey: "",
+    deepseekModel: "deepseek-chat",
+    openaiModel: "gpt-4o-mini",
+    grokModel: "grok-2-1212",
+    kimiModel: "moonshot-v1-8k",
+    geminiModel: "gemini-1.5-flash",
+    responseTimeout: 15,
+    verified: false
+  }
+};
 
-  // Splash Screen State
-  const [showSplash, setShowSplash] = useState(true);
-  const [splashProgress, setSplashProgress] = useState(0);
+export default function App() {
+  const [state, setState] = useState<AppState>(INITIAL_STATE);
+  const [loading, setLoading] = useState(false);
+
+
 
   // General App Toggles
   const [activeCategory, setActiveCategory] = useState<"Normal" | "Luxury">("Normal");
@@ -111,21 +216,7 @@ export default function App() {
     return () => clearInterval(interval);
   }, []);
 
-  // Splash Screen progress timer
-  useEffect(() => {
-    if (!showSplash) return;
-    const interval = setInterval(() => {
-      setSplashProgress((prev) => {
-        if (prev >= 100) {
-          clearInterval(interval);
-          setTimeout(() => setShowSplash(false), 500);
-          return 100;
-        }
-        return prev + 1.5;
-      });
-    }, 80);
-    return () => clearInterval(interval);
-  }, [showSplash]);
+
 
   // Update State handler for Admin Panel
   const handleUpdateState = async (updated: AppState) => {
@@ -198,13 +289,8 @@ export default function App() {
     }
   };
 
-  if (loading || !state) {
-    return (
-      <div className="w-screen h-screen bg-[#2D1B3D] flex flex-col items-center justify-center text-[#FFF8F0]">
-        <RefreshCw className="w-8 h-8 text-[#C9A84C] animate-spin mb-3" />
-        <p className="text-xs tracking-widest uppercase text-gray-400 font-mono">Initializing Royal Portal...</p>
-      </div>
-    );
+  if (!state) {
+    return null;
   }
 
   // Active Daily Offer
@@ -229,53 +315,7 @@ export default function App() {
       {/* 2. DYNAMIC GOLDEN SPARKLES ENGINE */}
       <GoldSparkles />
 
-      {/* 3. SPLASH SCREEN / INTRO LOAD POPUP */}
-      <AnimatePresence>
-        {showSplash && activeOffer && activeOffer.autoShowOnLoad && (
-          <motion.div 
-            initial={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/95 backdrop-blur-xl"
-          >
-            <div className="w-full max-w-lg p-8 rounded-3xl bg-gradient-to-b from-[#0F3D24] to-[#0A251A] border border-[#C9A84C]/50 shadow-2xl relative overflow-hidden text-center space-y-6">
-              
-              {/* Premium progress ring */}
-              <div className="relative w-24 h-24 mx-auto flex items-center justify-center">
-                <svg className="w-full h-full transform -rotate-90">
-                  <circle cx="48" cy="48" r="40" className="stroke-[#FFF8F0]/10 fill-none" strokeWidth="3" />
-                  <circle cx="48" cy="48" r="40" className="stroke-[#C9A84C] fill-none" strokeWidth="4" strokeDasharray="251.2" strokeDashoffset={251.2 - (251.2 * splashProgress) / 100} strokeLinecap="round" />
-                </svg>
-                <div className="absolute font-serif text-lg text-[#C9A84C] font-semibold">
-                  {Math.round(splashProgress)}%
-                </div>
-              </div>
 
-              <div className="space-y-2">
-                <p className="text-[10px] uppercase font-mono tracking-widest text-[#C9A84C]">Welcome to Opulence</p>
-                <h2 className="font-serif text-3xl font-bold text-white tracking-wide">ROYAL SPA & WELLNESS</h2>
-                <p className="text-xs text-gray-300 font-sans max-w-sm mx-auto">Connecting you to five-star certified rejuvenation suites in DumDum, Kolkata.</p>
-              </div>
-
-              {/* Offer Panel */}
-              <div className="p-5 rounded-2xl bg-white/5 border border-[#C9A84C]/30 space-y-1.5 gold-glow max-w-sm mx-auto">
-                <span className="px-2 py-0.5 rounded bg-[#C9A84C]/10 text-[#C9A84C] text-[9px] uppercase font-bold tracking-wider border border-[#C9A84C]/20">
-                  Daily Special Offer
-                </span>
-                <h3 className="font-serif text-base text-white font-semibold mt-1">{activeOffer.title}</h3>
-                <p className="text-xs text-[#FFF8F0]/90">{activeOffer.discountDescription}</p>
-                <p className="text-[10px] text-gray-400 font-mono mt-1">{activeOffer.duration}</p>
-              </div>
-
-              <button
-                onClick={() => setShowSplash(false)}
-                className="px-6 py-2 rounded-xl bg-white/10 hover:bg-white/15 text-xs text-[#FFF8F0] border border-white/20 transition-all"
-              >
-                Enter Serene Space (Skip)
-              </button>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
 
       {/* 4. PREMIUM NAVIGATION HEADER */}
       <header className="sticky top-0 z-40 bg-[#061d11]/80 backdrop-blur-md border-b border-[#C9A84C]/25 px-6 py-4 flex items-center justify-between transition-colors">
