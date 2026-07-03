@@ -198,8 +198,13 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ state, onUpdateState, on
         // Retrieve fresh database state after successful verification
         const stateRes = await fetch("/api/state");
         if (stateRes.ok) {
-          const freshState = await stateRes.json();
-          await onUpdateState(freshState);
+          const contentType = stateRes.headers.get("content-type");
+          if (contentType && contentType.includes("application/json")) {
+            const freshState = await stateRes.json();
+            await onUpdateState(freshState);
+          } else {
+            console.warn("State update did not return valid JSON. Skipping state synchronization.");
+          }
         }
       } else {
         setVerifyStatus("error");
@@ -1387,32 +1392,46 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ state, onUpdateState, on
 
               {/* Media Settings (Videos) card */}
               <div className="bg-[#05120c]/60 border border-[#C9A84C]/20 p-6 rounded-2xl space-y-4 font-sans text-xs">
-                <h3 className="font-serif text-base text-white font-semibold">Atmospheric Videos & Backgrounds</h3>
-                <p className="text-[10px] text-gray-400">Pasting links here instantly updates the background loops and signature showcase players across the main website.</p>
+                <div className="flex flex-col gap-1">
+                  <h3 className="font-serif text-base text-white font-semibold">🎥 Atmospheric Videos & Backgrounds (वातावरण वीडियो और बैकग्राउंड)</h3>
+                  <p className="text-[10px] text-gray-400">Pasting links here instantly updates the background loops and signature showcase players across the main website.</p>
+                </div>
                 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <div className="space-y-2">
-                    <label className="text-gray-400 font-semibold uppercase text-[9px] tracking-wider block">🎥 Background Silent Video Loop (Iframe URL)</label>
+                  <div className="space-y-2 bg-white/5 p-4 rounded-xl border border-white/5">
+                    <label className="text-gray-200 font-semibold uppercase text-[10px] tracking-wider block">🎥 Background Silent Video Loop (बैकग्राउंड वीडियो लूप)</label>
+                    <p className="text-[9px] text-gray-400 mb-2 leading-relaxed">
+                      Yaha apna custom video URL dalkar background change karein. Aap direct <strong>Cloudinary, YouTube embed, ya MP4 direct URL</strong> daal sakte hain.
+                    </p>
                     <input
                       type="text"
-                      placeholder="Enter Cloudinary or Youtube embed link..."
+                      placeholder="Enter Cloudinary link or Youtube embed link..."
                       value={state.content.backgroundVideoUrl || ""}
                       onChange={(e) => handleSaveState({ ...state, content: { ...state.content, backgroundVideoUrl: e.target.value } })}
-                      className="w-full p-2.5 rounded-lg bg-white/5 border border-white/10 text-white font-mono text-[11px]"
+                      className="w-full p-2.5 rounded-lg bg-black/40 border border-white/10 text-white font-mono text-[11px] focus:border-[#C9A84C] focus:outline-none"
                     />
-                    <span className="text-[10px] text-gray-400 block font-mono">Current: {state.content.backgroundVideoUrl || "Default Cloudinary Silent Loop"}</span>
+                    <div className="text-[10px] text-gray-400 break-all space-y-1 pt-1">
+                      <span className="block font-semibold">Chalu Video Link (Current):</span>
+                      <span className="block font-mono bg-black/20 p-1.5 rounded text-gray-300 text-[9px] select-all">{state.content.backgroundVideoUrl || "Default Cloudinary Silent Loop"}</span>
+                    </div>
                   </div>
 
-                  <div className="space-y-2">
-                    <label className="text-gray-400 font-semibold uppercase text-[9px] tracking-wider block">🎬 Signature Sanctuary Video (MP4 / Direct URL)</label>
+                  <div className="space-y-2 bg-white/5 p-4 rounded-xl border border-white/5">
+                    <label className="text-gray-200 font-semibold uppercase text-[10px] tracking-wider block">🎬 Signature Sanctuary Video (सिग्नेचर थेरेपी वीडियो)</label>
+                    <p className="text-[9px] text-gray-400 mb-2 leading-relaxed">
+                      Main website par dikhne wale dynamic visual video player ko change karein. Direct MP4 link enter karein.
+                    </p>
                     <input
                       type="text"
                       placeholder="Enter .mp4 or direct video link..."
                       value={state.content.sectionVideoUrl || ""}
                       onChange={(e) => handleSaveState({ ...state, content: { ...state.content, sectionVideoUrl: e.target.value } })}
-                      className="w-full p-2.5 rounded-lg bg-white/5 border border-white/10 text-white font-mono text-[11px]"
+                      className="w-full p-2.5 rounded-lg bg-black/40 border border-white/10 text-white font-mono text-[11px] focus:border-[#C9A84C] focus:outline-none"
                     />
-                    <span className="text-[10px] text-gray-400 block font-mono">Current: {state.content.sectionVideoUrl || "Water Lilly Spa Sanctuary MP4"}</span>
+                    <div className="text-[10px] text-gray-400 break-all space-y-1 pt-1">
+                      <span className="block font-semibold">Chalu Video Link (Current):</span>
+                      <span className="block font-mono bg-black/20 p-1.5 rounded text-gray-300 text-[9px] select-all">{state.content.sectionVideoUrl || "Water Lilly Spa Sanctuary MP4"}</span>
+                    </div>
                   </div>
                 </div>
               </div>

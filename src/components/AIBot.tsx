@@ -181,21 +181,25 @@ export const AIBot: React.FC<AIBotProps> = ({ onClose, onAutoFillBooking }) => {
       });
 
       if (response.ok) {
-        const data = await response.json();
-        const botText = data.text;
+        const contentType = response.headers.get("content-type");
+        if (contentType && contentType.includes("application/json")) {
+          const data = await response.json();
+          const botText = data.text;
 
-        const botMsg: ChatMessage = {
-          sender: "bot",
-          text: botText,
-          timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
-        };
+          const botMsg: ChatMessage = {
+            sender: "bot",
+            text: botText,
+            timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+          };
 
-        setMessages((prev) => [...prev, botMsg]);
-        speakResponse(botText, lang);
-
-        // Check if bot mentioned location names or booking keywords
-        // Provide clickable smart action suggestions
-        handleSmartTriggers(botText);
+          setMessages((prev) => [...prev, botMsg]);
+          speakResponse(botText, lang);
+          // Check if bot mentioned location names or booking keywords
+          // Provide clickable smart action suggestions
+          handleSmartTriggers(botText);
+        } else {
+          throw new Error("API returned an invalid non-JSON response format (Server might be offline or hosted as static)");
+        }
 
       } else {
         throw new Error("Chat response failed");

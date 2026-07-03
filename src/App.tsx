@@ -88,6 +88,193 @@ const INITIAL_STATE: AppState = {
       image: "https://images.unsplash.com/photo-1519699047748-de8e457a634e?auto=format&fit=crop&q=80&w=600",
       isPrivate: true,
       available: true
+    },
+    {
+      id: "4",
+      name: "Hot Stone Massage",
+      category: "Normal",
+      price: 1999,
+      duration: 75,
+      description: "Heated, smooth basalt stones are placed on key energy points of the body, melting away stress and allowing deep muscle manipulation and ultimate soothing warmth.",
+      image: "https://images.unsplash.com/photo-1515377905703-c4788e51af15?auto=format&fit=crop&q=80&w=600",
+      isPrivate: true,
+      available: true
+    },
+    {
+      id: "5",
+      name: "Thai Massage",
+      category: "Normal",
+      price: 2199,
+      duration: 60,
+      description: "An interactive, dry therapy involving rhythmic compression, acupressure, and assisted yoga-like stretching. Energizes the body, improves flexibility, and clears energy blocks.",
+      image: "https://images.unsplash.com/photo-1519823551278-64ac92734fb1?auto=format&fit=crop&q=80&w=600",
+      isPrivate: true,
+      available: true
+    },
+    {
+      id: "6",
+      name: "Reflexology",
+      category: "Normal",
+      price: 1299,
+      duration: 45,
+      description: "Focused pressure on precise reflex zones of the feet corresponding to vital organs. Restores natural energy flow, reduces anxiety, and enhances body-wide wellness.",
+      image: "https://images.unsplash.com/photo-1519824141121-b9767426e021?auto=format&fit=crop&q=80&w=600",
+      isPrivate: true,
+      available: true
+    },
+    {
+      id: "7",
+      name: "Sports Massage",
+      category: "Normal",
+      price: 2499,
+      duration: 60,
+      description: "Geared toward active individuals. Focuses on preventing injuries, improving flexibility, and accelerating recovery times using targeted trigger point therapy.",
+      image: "https://images.unsplash.com/photo-1616394584738-fc6e612e71b9?auto=format&fit=crop&q=80&w=600",
+      isPrivate: true,
+      available: true
+    },
+    {
+      id: "8",
+      name: "Lymphatic Drainage",
+      category: "Normal",
+      price: 2799,
+      duration: 60,
+      description: "A gentle, rhythmic massage that stimulates lymph fluid movement. Highly effective for reducing bloating, boosting immunity, and helping detoxify the body naturally.",
+      image: "https://images.unsplash.com/photo-1552693673-1bf9582f6fc3?auto=format&fit=crop&q=80&w=600",
+      isPrivate: true,
+      available: true
+    },
+    {
+      id: "9",
+      name: "Balinese Massage",
+      category: "Normal",
+      price: 2999,
+      duration: 75,
+      description: "A holistic deep-tissue therapy utilizing acupressure, skin rolling, and aromatherapy oils to bring a profound sense of peace and relaxation.",
+      image: "https://images.unsplash.com/photo-1537861295351-7649622d1031?auto=format&fit=crop&q=80&w=600",
+      isPrivate: true,
+      available: true
+    },
+    {
+      id: "10",
+      name: "Couples Massage",
+      category: "Normal",
+      price: 3500,
+      duration: 90,
+      description: "Share the gift of blissful relaxation side-by-side in our private premium suite with dual therapists. Custom tailored to each partner's unique preferences.",
+      image: "https://images.unsplash.com/photo-1516549655169-df83a0774514?auto=format&fit=crop&q=80&w=600",
+      isPrivate: true,
+      available: true
+    },
+    {
+      id: "11",
+      name: "Royal Gold Massage",
+      category: "Luxury",
+      price: 3500,
+      duration: 90,
+      description: "A majestic treatment featuring real gold-infused luxury oils. Revitalizes skin luminosity, relaxes deep muscle layers, and leaves you feeling like royalty.",
+      image: "https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?auto=format&fit=crop&q=80&w=600",
+      isPrivate: true,
+      available: true
+    },
+    {
+      id: "12",
+      name: "Diamond Pearl Therapy",
+      category: "Luxury",
+      price: 4999,
+      duration: 90,
+      description: "An exquisite skin-polishing and tension-release ritual utilizing crushed pearl extract and diamond dust oils for unparalleled dermal radiance and peace.",
+      image: "https://images.unsplash.com/photo-1590439471364-192aa70c0b53?auto=format&fit=crop&q=80&w=600",
+      isPrivate: true,
+      available: true
+    },
+    {
+      id: "13",
+      name: "24K Gold Facial Massage",
+      category: "Luxury",
+      price: 5999,
+      duration: 75,
+      description: "Ultimate skin luxury. Combines facial acupressure with a 24-karat gold leaf mask to boost collagen, eliminate fine lines, and hydrate deeply.",
+      image: "https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?auto=format&fit=crop&q=80&w=600",
+      isPrivate: true,
+      available: true
+    },
+    {
+      id: "14",
+      name: "Royal Couples Retreat",
+      category: "Luxury",
+      price: 7499,
+      duration: 120,
+      description: "The ultimate dual indulgence. Includes a gold body wrap, deep tissue hot-stone massage, custom facial, and a private warm herbal bath experience.",
+      image: "https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&q=80&w=600",
+      isPrivate: true,
+      available: true
+    },
+    {
+      id: "15",
+      name: "Platinum Body Scrub",
+      category: "Luxury",
+      price: 8999,
+      duration: 90,
+      description: "High-end body exfoliation using premium sea salt, platinum peptides, and rare organic essential botanical nectars for baby-soft skin texture.",
+      image: "https://images.unsplash.com/photo-1512290923902-8a9f81dc236c?auto=format&fit=crop&q=80&w=600",
+      isPrivate: true,
+      available: true
+    },
+    {
+      id: "16",
+      name: "Royal Thai Herbal",
+      category: "Luxury",
+      price: 9999,
+      duration: 90,
+      description: "A deep therapeutic massage utilizing rare, hot herbal compresses filled with Thai therapeutic botanicals, paired with royal oil stretching techniques.",
+      image: "https://images.unsplash.com/photo-1600334188221-3dfbec243d54?auto=format&fit=crop&q=80&w=600",
+      isPrivate: true,
+      available: true
+    },
+    {
+      id: "17",
+      name: "Diamond Bliss Package",
+      category: "Luxury",
+      price: 12499,
+      duration: 120,
+      description: "A signature experience. Immersive sound therapy, dual-therapist massage with micro-pearl serums, followed by a pure gold leaf full body lotion treatment.",
+      image: "https://images.unsplash.com/photo-1596178060671-7a80dc8059ea?auto=format&fit=crop&q=80&w=600",
+      isPrivate: true,
+      available: true
+    },
+    {
+      id: "18",
+      name: "Royal Spa Package",
+      category: "Luxury",
+      price: 15999,
+      duration: 150,
+      description: "Full-body premium purification. Steam bath, Himalayan pink salt scrub, luxury facial, signature hot-stone massage, and fresh botanical mocktails served.",
+      image: "https://images.unsplash.com/photo-1506126613408-eca07ce68773?auto=format&fit=crop&q=80&w=600",
+      isPrivate: true,
+      available: true
+    },
+    {
+      id: "19",
+      name: "Platinum Royal Experience",
+      category: "Luxury",
+      price: 18499,
+      duration: 150,
+      description: "Conducted inside our private imperial VIP suite. Private sauna session, premium full body exfoliation, custom anti-aging facial, and intensive four-hand massage.",
+      image: "https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?auto=format&fit=crop&q=80&w=600",
+      isPrivate: true,
+      available: true
+    },
+    {
+      id: "20",
+      name: "Crown Jewel Ultimate",
+      category: "Luxury",
+      price: 20000,
+      duration: 180,
+      description: "The peak of luxury wellness. Fully customizable 3-hour journey combining customized hot oil massage, collagen booster facial, hand & foot therapy, and champagne/tea.",
+      image: "https://images.unsplash.com/photo-1489659639091-8b687bc4386e?auto=format&fit=crop&q=80&w=600",
+      isPrivate: true,
+      available: true
     }
   ],
   therapists: [
@@ -98,7 +285,32 @@ const INITIAL_STATE: AppState = {
       experience: "6 Years",
       rating: 4.9,
       images: [
-        "https://images.unsplash.com/photo-1594744803329-e58b31de215f?auto=format&fit=crop&q=80&w=300"
+        "https://images.unsplash.com/photo-1594744803329-e58b31de215f?auto=format&fit=crop&q=80&w=300",
+        "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&q=80&w=300"
+      ],
+      visible: true
+    },
+    {
+      id: "t2",
+      name: "Priya Patel",
+      specialization: "Diamond Pearl & Aromatherapy",
+      experience: "5 Years",
+      rating: 4.8,
+      images: [
+        "https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&q=80&w=300",
+        "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=300"
+      ],
+      visible: true
+    },
+    {
+      id: "t3",
+      name: "Anjali Sen",
+      specialization: "Thai Massage & 24K Gold Facial",
+      experience: "7 Years",
+      rating: 5,
+      images: [
+        "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&q=80&w=300",
+        "https://images.unsplash.com/photo-1567532939604-b6b5b0db2604?auto=format&fit=crop&q=80&w=300"
       ],
       visible: true
     }
@@ -106,42 +318,111 @@ const INITIAL_STATE: AppState = {
   offers: [
     {
       id: "o1",
-      title: "Water Lily Welcome Special",
+      title: "Royal Welcome Special",
       discountDescription: "Flat 20% OFF on all Luxury services. Experience premium rejuvenation.",
       duration: "Expires tonight at 10 PM",
       animationEffect: "gold-glow",
       active: true,
       bannerHomepage: true,
       scheduleFuture: "",
-      autoShowOnLoad: false
+      autoShowOnLoad: true
     }
   ],
-  bookings: [],
+  bookings: [
+    {
+      id: "b1",
+      name: "Rohan Roy",
+      phone: "+91 98765 43210",
+      spaLocation: "Drop Spa",
+      serviceName: "Swedish Massage",
+      dateTime: "2026-07-03T14:00",
+      specialRequests: "Please arrange a quiet corner room",
+      status: "Confirmed",
+      assignedTherapistId: "t1",
+      createdAt: "2026-07-03T12:04:37.804Z"
+    }
+  ],
   locations: [
     {
       id: "drop",
       name: "Drop Spa",
       address: "Drop Spa - Best Massage Parlour in DumDum, 1st Floor, 66/2, Dum Dum Rd, Ward Number 22, Amarpalli, Kolkata, West Bengal 700074",
-      phoneNumbers: ["+91 98307 93242"],
+      phoneNumbers: [
+        "+91 98307 93242"
+      ],
       mapEmbedUrl: "https://maps.google.com/maps?q=Drop%20Spa%20Dum%20Dum%20Kolkata&t=&z=15&ie=UTF8&iwloc=&output=embed",
+      visible: true
+    },
+    {
+      id: "moon",
+      name: "Moon Flower Spa",
+      address: "Moon Flower Spa - Best Spa in Nager Bazar, 1st Floor P, 345, Jessore Rd, near UCO Bank, Dhopa Patty, Nagerbazar, DumDum, Kolkata, West Bengal 700074",
+      phoneNumbers: [
+        "+91 81003 11604",
+        "+91 98744 65122"
+      ],
+      mapEmbedUrl: "https://maps.google.com/maps?q=Moon%20Flower%20Spa%20Jessore%20Road%20Kolkata&t=&z=15&ie=UTF8&iwloc=&output=embed",
+      visible: true
+    },
+    {
+      id: "waterlilly",
+      name: "The Waterlilly Spa",
+      address: "The Waterlilly Spa, 3RD Floor, Aminia Building, 166, Jessore Rd, beside DIAMOND PLAZA, Ward Number 23, Nagerbazar, Dumdum, Kolkata, West Bengal 700055",
+      phoneNumbers: [
+        "+91 91635 78888",
+        "+91 62897 43248"
+      ],
+      mapEmbedUrl: "https://maps.google.com/maps?q=The%20Waterlilly%20Spa%20Diamond%20Plaza%20Kolkata&t=&z=15&ie=UTF8&iwloc=&output=embed",
       visible: true
     }
   ],
   content: {
-    heroTitle: "WATER LILY INDULGENCE FOR SOUL & SENSES",
+    heroTitle: "ROYAL INDULGENCE FOR SOUL & SENSES",
     heroSubtitle: "Step into an oasis of pure serenity. Experiencing premium 5-star therapies in DumDum, Kolkata.",
-    aboutText: "Welcome to Kolkata's ultimate luxury spa chain. Across our three premium locations in DumDum and Jessore Road, we specialize in high-end massage therapies, restorative facials, and wellness scrubs.",
+    aboutText: "Welcome to Kolkata's ultimate luxury spa chain. Across our three premium locations in DumDum and Jessore Road, we specialize in high-end massage therapies, restorative facials, and wellness scrubs. Our certified female therapists combine international expertise with ancient oils to deliver an incomparable state of bliss.",
     galleryImages: [
       "https://images.unsplash.com/photo-1600334089648-b0d9d3028eb2?auto=format&fit=crop&q=80&w=800",
-      "https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&q=80&w=800"
+      "https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&q=80&w=800",
+      "https://images.unsplash.com/photo-1519699047748-de8e457a634e?auto=format&fit=crop&q=80&w=800",
+      "https://images.unsplash.com/photo-1515377905703-c4788e51af15?auto=format&fit=crop&q=80&w=800",
+      "https://images.unsplash.com/photo-1537861295351-7649622d1031?auto=format&fit=crop&q=80&w=800",
+      "https://images.unsplash.com/photo-1516549655169-df83a0774514?auto=format&fit=crop&q=80&w=800"
     ],
     testimonials: [
-      { name: "Debashree Sen", comment: "The Royal Gold Massage is an absolute masterpiece.", rating: 5, date: "2026-06-15" }
+      {
+        name: "Debashree Sen",
+        comment: "The Royal Gold Massage is an absolute masterpiece. I went to the Moon Flower Spa and it is exceptionally luxurious. Highly recommended!",
+        rating: 5,
+        date: "2026-06-15"
+      },
+      {
+        name: "Rahul Das",
+        comment: "The therapist was incredibly professional. Drop Spa has the perfect ambient lighting and absolute peace. No rush, pure bliss.",
+        rating: 5,
+        date: "2026-06-28"
+      },
+      {
+        name: "Sreemoyee Dey",
+        comment: "The Waterlilly Spa beside Diamond Plaza is beautifully designed. The voice chatbot on the site was also very helpful in booking!",
+        rating: 5,
+        date: "2026-07-01"
+      }
     ],
     faqs: [
-      { question: "Do you have certified female therapists?", answer: "Yes, 100% of our therapy staff consists of certified professional female therapists." }
+      {
+        question: "What is the private service tag represent?",
+        answer: "All our therapies are conducted in 100% private sound-isolated chambers styled with luxurious candles, private ambient lights, and attached showers."
+      },
+      {
+        question: "Do you have certified female therapists?",
+        answer: "Yes, 100% of our therapy staff consists of certified professional female therapists with over 5+ years of training in local and international treatments."
+      },
+      {
+        question: "Can I customize my session?",
+        answer: "Absolutely. You can select specific massage oils, pressure intensities, hot stone options, or request special aromatics in the booking form or on arrival."
+      }
     ],
-    backgroundVideoUrl: "https://player.cloudinary.com/embed/?cloud_name=tbpxcezd&public_id=From_Klickpin.com-_75_Fresh_Instagram_Growth_Tips_for_Everyday-pin-id-1128644356638366738_tajian&autoplay=true&loop=true&muted=true&controls=false",
+    backgroundVideoUrl: "https://player.cloudinary.com/embed/?cloud_name=tbpxcezd&public_id=From_Klickpin.com-_75_Fresh_Instagram_Growth_Tips_for_Everyday-pin-id-1128644356638366738_tajian&autoplay=1&loop=1&muted=1&controls=0",
     sectionVideoUrl: "https://res.cloudinary.com/kyyl8tuj/video/upload/v1783032912/Water_Lilly_Spa_Website_202607030424_adcvqo.mp4"
   },
   apiSettings: {
@@ -289,6 +570,16 @@ export default function App() {
       createdAt: new Date().toISOString()
     };
 
+    // ALWAYS update local state immediately so bookings never disappear on Netlify/static hosting!
+    const updatedBookings = [localBooking, ...(state.bookings || [])];
+    const updatedState = { ...state, bookings: updatedBookings };
+    setState(updatedState);
+    try {
+      localStorage.setItem("spa_state", JSON.stringify(updatedState));
+    } catch (err) {
+      console.error("Failed to save booking to localStorage", err);
+    }
+
     try {
       const res = await fetch("/api/bookings", {
         method: "POST",
@@ -301,10 +592,13 @@ export default function App() {
         let data;
         if (contentType && contentType.includes("application/json")) {
           data = await res.json();
+          setRecentBookingResult(data);
+          // If server succeeded and returned JSON, fetch fresh server state to ensure synchronization
+          fetchState();
         } else {
-          data = { success: true, booking: localBooking };
+          // If it's HTML (Netlify redirect), we are on a static host. Local save is already done.
+          setRecentBookingResult({ success: true, booking: localBooking });
         }
-        setRecentBookingResult(data);
         setBookingStatus("success");
         // Clear form
         setBookingForm({
@@ -315,15 +609,8 @@ export default function App() {
           dateTime: "",
           specialRequests: ""
         });
-        // Fetch state to load new booking in lists
-        fetchState();
       } else {
-        // Fallback to local save if server fails (e.g., Netlify/static build)
-        const updatedBookings = [localBooking, ...(state.bookings || [])];
-        const updatedState = { ...state, bookings: updatedBookings };
-        setState(updatedState);
-        localStorage.setItem("spa_state", JSON.stringify(updatedState));
-
+        // Server failed, but local state was already saved!
         setRecentBookingResult({ success: true, booking: localBooking });
         setBookingStatus("success");
         setBookingForm({
@@ -337,12 +624,6 @@ export default function App() {
       }
     } catch (err) {
       console.warn("API booking submit failed, falling back to local booking save", err);
-      // Fallback to local save if connection fails (e.g., Netlify offline/static build)
-      const updatedBookings = [localBooking, ...(state.bookings || [])];
-      const updatedState = { ...state, bookings: updatedBookings };
-      setState(updatedState);
-      localStorage.setItem("spa_state", JSON.stringify(updatedState));
-
       setRecentBookingResult({ success: true, booking: localBooking });
       setBookingStatus("success");
       setBookingForm({
